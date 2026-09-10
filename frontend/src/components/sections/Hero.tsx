@@ -1,25 +1,43 @@
 import Link from 'next/link';
-
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="hero__bg" /> <img src="/hero-offshore.png" alt="Hero Background" className="hero__bg" />
+      <img
+        src="/profile-hero.png"
+        alt="Offshore platform and marine support vessel at sunset"
+        className="hero__bg"
+      />
       <div className="hero__overlay" />
-      <div className="container hero__content">
-        <span className="hero__eyebrow">Nigeria's energy partner</span>
-        <h1 className="hero__heading">
-          Engineering<br />
-          <span className="hero__heading--red">solutions</span> for<br />
-          the Energy<br />
-          Industry
-        </h1>
-        <p className="hero__subtext">
-          Delivering world-class oil and gas engineering solutions, procurement
-          services, and infrastructure development across Nigeria and beyond.
-        </p>
-        <div className="hero__actions">
-          <Link href="/services" className="btn-red">Our Services ↓</Link>
-          <Link href="/about" className="btn-outline">Learn More</Link>
+      <div className="container">
+        <div className="hero__content">
+          <span className="hero__eyebrow">
+            ENGINEERING · ENERGY · MARINE · LOGISTICS
+          </span>
+          <h1 className="hero__heading">
+            Integrated support.
+            <br />
+            <span className="hero__heading--red">
+              From shore
+              <br />
+              to offshore.
+            </span>
+          </h1>
+          <p className="hero__subtext">
+            Shoshos Oil and Gas Intl. Limited brings well services, pipeline
+            expertise and marine logistics together to support demanding energy
+            operations.
+          </p>
+          <div className="hero__actions">
+            <Link href="/services" className="btn-red">
+              Explore our services →
+            </Link>
+            <a href="/brochure.pdf" download className="btn-outline-white">
+              Company profile ↗
+            </a>
+          </div>
+          <div className="hero-location">
+            BASED IN WARRI, NIGERIA · ONSHORE &amp; OFFSHORE
+          </div>
         </div>
       </div>
     </section>

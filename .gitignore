@@ -5,4 +5,11 @@ venv/
 .env.local
 __pycache__/
 *.pyc
-rewaj.db
+shoshos.db
+
+.tools/
+*.tsbuildinfo
+*.log
+*.db
+*.db-shm
+*.db-wal

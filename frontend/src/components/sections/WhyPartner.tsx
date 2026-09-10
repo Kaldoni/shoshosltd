@@ -1,40 +1,66 @@
-'use client';
 import Link from 'next/link';
-import { Award, AlertCircle, Lightbulb, Trophy } from 'lucide-react';
-
+import { Shield, Anchor, Handshake } from 'lucide-react';
 const reasons = [
-  { Icon: Award, title:'Local Content Excellence', desc:'Proudly Nigerian, maximizing local talent and resources for every project.' },
-  { Icon: AlertCircle, title:'Uncompromising Safety', desc:'Our "Safety First" culture ensures zero incidents and complete compliance.' },
-  { Icon: Lightbulb, title:'Innovative Solutions', desc:'We leverage the latest engineering methods and technology to deliver smarter, more efficient outcomes.' },
+  {
+    Icon: Anchor,
+    title: 'Onshore and offshore reach',
+    desc: 'Supporting operations across offshore, swamp, shallow-water and onshore locations.',
+  },
+  {
+    Icon: Shield,
+    title: 'Environmental responsibility',
+    desc: 'An environmental management system focused on pollution prevention, responsible waste handling and protecting local communities.',
+  },
+  {
+    Icon: Handshake,
+    title: 'Built around your operation',
+    desc: 'Engineering and logistics expertise, backed by technical partnerships and a commitment to dependable service.',
+  },
 ];
-
 export default function WhyPartner() {
   return (
     <section className="why-partner" id="about">
       <div className="container why-partner__inner">
-        <div>
-          <div className="why-partner__img-wrap">
-            <img src="/team-offshore.jpg" alt="Rewaj team on-site" className="why-partner__img" />
-            <div className="why-partner__badge">
-              <Award className="badge__icon" size={30} />
-              <div><strong>ISO Certified</strong><span>Quality Managemnet System</span></div>
+        <div className="why-partner__img-wrap">
+          <img
+            src="/profile-hero.png"
+            alt="Offshore energy infrastructure"
+            className="why-partner__img"
+          />
+          <div className="why-partner__badge">
+            <Anchor size={30} />
+            <div>
+              <strong>Warri, Nigeria</strong>
+              <span>Connected to your operation</span>
             </div>
           </div>
         </div>
         <div>
-          <span className="eyebrow">OUR ADVANTAGE</span>
-          <h2 className="section-title">Why Companies Partner with Rewaj</h2>
+          <span className="eyebrow">A PROMISE OF QUALITY</span>
+          <h2 className="section-title">
+            The right support.
+            <br />
+            Where it matters.
+          </h2>
           <div className="section-divider" />
-          <p className="why-partner__lead">At Rewaj Corporate Limited, we combine global standards with deep local expertise to deliver results that exceed expectations.</p>
+          <p className="why-partner__lead">
+            At Shoshos Oil and Gas Intl. Limited, lasting partnerships start
+            with understanding your operational needs.
+          </p>
           <div className="reasons">
-            {reasons.map((r, i) => (
-              <div key={i} className="reason reason--animate">
+            {reasons.map((r) => (
+              <div key={r.title} className="reason">
                 <r.Icon className="reason__icon" />
-                <div><h4 className="reason__title">{r.title}</h4><p className="reason__desc">{r.desc}</p></div>
+                <div>
+                  <h3 className="reason__title">{r.title}</h3>
+                  <p className="reason__desc">{r.desc}</p>
+                </div>
               </div>
             ))}
           </div>
-          <Link href="/contact" className="btn-red">Start a Conversation →</Link>
+          <Link href="/about" className="btn-red">
+            Meet shoshos →
+          </Link>
         </div>
       </div>
     </section>

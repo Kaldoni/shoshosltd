@@ -15,8 +15,8 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title="Rewaj Corporate Limited API",
-    description="Backend API for Rewaj Corporate Limited website",
+    title="Shoshos Oil and Gas Intl. Limited API",
+    description="Backend API for Shoshos Oil and Gas Intl. Limited website",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -40,7 +40,7 @@ app.include_router(projects_router, prefix="/api/projects", tags=["Projects"])
 
 @app.get("/")
 async def root():
-    return {"message": "Rewaj Corporate Limited API", "status": "running"}
+    return {"message": "Shoshos Oil and Gas Intl. Limited API", "status": "running"}
 
 @app.get("/health")
 async def health():

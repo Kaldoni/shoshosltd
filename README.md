@@ -1,13 +1,15 @@
-# Rewaj Corporate Limited — Full Stack Website
+# Shoshos Oil and Gas Intl. Limited — Full Stack Website
 
 > **Stack:** Next.js 14 (React, TypeScript) + FastAPI (Python) + PostgreSQL
+
+Company content and colours come from the supplied Shoshos profile. See [brand and content notes](docs/brand-and-content.md) for page references, domain spelling notes and configuration details. The downloadable profile is `frontend/public/brochure.pdf`.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-rcl-website/
+shoshos-website/
 ├── frontend/                  # Next.js 14 App
 │   ├── src/
 │   │   ├── app/
@@ -59,16 +61,20 @@ rcl-website/
 ### Prerequisites
 - Node.js 18+
 - Python 3.11+
-- PostgreSQL 15+
+- SQLite for local development (included with Python), or PostgreSQL
 
 ---
 
 ### 1. Database Setup
 
+Local development uses SQLite and requires no Supabase account or database server. Keep `DATABASE_URL=sqlite+aiosqlite:///./shoshos.db` in `backend/.env`. Tables are created automatically.
+
+For optional PostgreSQL, configure its connection string and create the database:
+
 ```bash
 # Create the database
 psql -U postgres
-CREATE DATABASE rewaj_db;
+CREATE DATABASE shoshos_db;
 \q
 ```
 
@@ -98,12 +104,18 @@ The API will be live at: **http://localhost:8000**
 Interactive docs at: **http://localhost:8000/docs**
 
 #### Seed the Admin Account
-After the backend is running, call this endpoint **once**:
+Set `ADMIN_EMAIL_DEFAULT` and `ADMIN_PASSWORD_DEFAULT` in `backend/.env`, then run from the `backend` directory:
 ```bash
-curl -X POST http://localhost:8000/api/auth/seed-admin
+python -m app.manage_admin
 ```
-This creates the default admin: `admin@rewajcorporate.com` / `ChangeMe123!`
-> ⚠️ Change the password immediately after first login by updating `.env`
+This creates the administrator using your configured credentials. The example defaults are `admin@shoshosltd.com` / `ChangeMe123!`; choose your own password before creating the account.
+
+Editing `.env` alone does not change an existing account. To apply an updated password explicitly:
+```bash
+python -m app.manage_admin --reset-password
+```
+
+Start the backend on port 8000 before signing in. Both local frontend ports 3000 and 3100 are allowed by the example CORS configuration.
 
 ---
 
@@ -185,11 +197,13 @@ Features:
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--red` | `#FB0202` | Primary accent, CTAs |
-| `--navy` | `#0F172A` | Background, navbar, footer |
-| `--navy-light` | `#1E293B` | Secondary dark surfaces |
+| `--red` | `#B94312` | Accessible orange for CTAs |
+| `--brand-orange` | `#F36B2B` | Orange from the company profile |
+| `--brand-cyan` | `#19B8D1` | Cyan from the company profile |
+| `--navy` | `#071827` | Background, navbar, footer |
+| `--navy-light` | `#0B2438` | Secondary dark surfaces |
 | `--slate-500` | `#64748B` | Body text |
-| `--bg-light` | `#F8FAFC` | Section backgrounds |
+| `--bg-light` | `#F4F8FA` | Section backgrounds |
 | Font Display | Montserrat | Headings, logo |
 | Font Body | Inter | Body text |
 | Font UI | Inter | Buttons, labels, nav |
@@ -233,4 +247,4 @@ To activate email notifications when a contact form is submitted:
 
 ---
 
-Built with ❤️ for Rewaj Corporate Limited
+Built with ❤️ for Shoshos Oil and Gas Intl. Limited

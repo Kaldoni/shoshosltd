@@ -1,105 +1,41 @@
-'use client';
-import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-
-const categories = [
-  { name:'Engineering', count:12 },{ name:'Safety & HSE', count:8 },
-  { name:'Procurement', count:5 },{ name:'Industry News', count:14 },{ name:'Company Updates', count:3 },
-];
-const recentPosts = [
-  { title:'Why Instrumentation Fittings Are Critical in Oil...', date:'OCT 12, 2023', slug:'why-instrumentation-fittings-critical' },
-  { title:'Training the Next Generation of Nigerian Welders', date:'OCT 05, 2023', slug:'training-nigerian-welders' },
-  { title:'RCL Receives Best Safety Record Award 2023', date:'SEP 28, 2023', slug:'rcl-best-safety-record-2023' },
-];
-const articles = [
-  { slug:'role-of-technology-oil-gas-safety', category:'INDUSTRY TRENDS', date:'October 24, 2023', title:'The Role of Technology in Improving Safety and Efficiency in the Oil and Gas Industry', excerpt:'The oil and gas industry has always been crucial for powering industries, transportation, and economic growth. Modern digital monitoring systems, smart sensors, and automated control technologies have fundamentally transformed how operations are conducted. Today, engineers can monitor these systems from centralized control rooms and receive immediate alerts if abnormal conditions occur.', author:'Asaba Oghenegoma Godspower' },
-  { slug:'local-content-development-nigeria', category:'COMPANY UPDATES', date:'October 10, 2023', title:'How Rewaj is Championing Local Content Development in Nigeria', excerpt:'Since our founding in 2001, Rewaj Corporate Limited has been at the forefront of building local capacity in the Nigerian oil and gas sector. Our commitment to training Nigerian engineers and technicians has resulted in a workforce that rivals international standards.', author:'Lanre Olasupo' },
-];
-
+import { articles } from '@/data/articles';
+export const metadata = {
+  title: 'Company Insights | Shoshos Oil and Gas Intl. Limited',
+};
 export default function BlogPage() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-  const [page, setPage] = useState(1);
-
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop:'72px', background:'var(--white)' }}>
-        <section className="blog-header">
+      <main style={{ paddingTop: 72 }}>
+        <section className="services-page-hero">
           <div className="container">
-            <h1 className="blog-title">Industry Insights</h1>
-            <p className="blog-sub">Expert analysis and updates on the Nigerian energy sector, engineering innovations, and global oil and gas trends.</p>
+            <span className="eyebrow">INSIDE SHOSHOS</span>
+            <h1 className="services-page-hero__title">
+              Our capabilities.
+              <br />
+              Our perspective.
+            </h1>
+            <p className="services-page-hero__sub">
+              An introduction to our operations and principles, drawn from the
+              shoshos company profile.
+            </p>
           </div>
         </section>
-        <section className="blog-content">
-          <div className="container blog-layout">
-            <div>
-              {articles.map(article => (
-                <article key={article.slug} className="article-card">
-                  <div className="article-card__image"><img src="/images/blog-featured.jpg" alt={article.title} /></div>
-                  <div className="article-card__body">
-                    <div className="article-meta">
-                      <span className="article-category">{article.category}</span>
-                      <span className="article-date">{article.date}</span>
-                    </div>
-                    <h2 className="article-title">{article.title}</h2>
-                    <p className="article-excerpt">{article.excerpt}</p>
-                    <div className="article-footer">
-                      <div className="article-author">
-                        <div className="author-avatar">{article.author[0]}</div>
-                        <span>{article.author}</span>
-                      </div>
-                      <Link href={`/blog/${article.slug}`} className="read-more">Read Full Article →</Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-              <div className="pagination">
-                <button className="page-btn" disabled={page===1} onClick={()=>setPage(p=>p-1)}>‹</button>
-                {[1,2,3].map(p=><button key={p} className={`page-btn${page===p?' active':''}`} onClick={()=>setPage(p)}>{p}</button>)}
-                <button className="page-btn" onClick={()=>setPage(p=>p+1)}>›</button>
-              </div>
-            </div>
-            <aside className="blog-sidebar">
-              <div className="sidebar-widget">
-                <h3 className="sidebar-title">Search Articles</h3>
-                <div className="search-box"><span>🔍</span><input type="search" placeholder="Search insights..." /></div>
-              </div>
-              <div className="sidebar-widget">
-                <h3 className="sidebar-title"><span className="sidebar-title__bar"/>Recent Posts</h3>
-                <div className="recent-posts">
-                  {recentPosts.map(post=>(
-                    <Link key={post.slug} href={`/blog/${post.slug}`} className="recent-post">
-                      <div className="recent-post__img"/>
-                      <div><span className="recent-post__title">{post.title}</span><span className="recent-post__date">{post.date}</span></div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div className="sidebar-widget">
-                <h3 className="sidebar-title"><span className="sidebar-title__bar"/>Categories</h3>
-                <div className="categories">
-                  {categories.map(cat=>(
-                    <div key={cat.name} className="category-row">
-                      <span className="category-name">{cat.name}</span>
-                      <span className="category-count">{String(cat.count).padStart(2,'0')}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="sidebar-widget sidebar-widget--red">
-                <h3 className="newsletter-title">Stay Updated</h3>
-                <p className="newsletter-sub">Receive the latest industry insights and company news directly in your inbox.</p>
-                {subscribed ? <p style={{color:'#fff',fontSize:'14px',textAlign:'center',padding:'8px 0'}}>✅ You&apos;re subscribed!</p> : (
-                  <>
-                    <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email Address" className="newsletter-input"/>
-                    <button className="newsletter-btn" onClick={()=>email&&setSubscribed(true)}>SUBSCRIBE</button>
-                  </>
-                )}
-              </div>
-            </aside>
+        <section className="services-section">
+          <div className="container services-grid">
+            {articles.map((a) => (
+              <article className="service-card" key={a.slug}>
+                <span className="eyebrow">{a.category}</span>
+                <h2 className="service-card__title">{a.title}</h2>
+                <p className="service-card__desc">{a.text.slice(0, 160)}…</p>
+                <Link className="service-card__link" href={'/blog/' + a.slug}>
+                  Read more →
+                </Link>
+              </article>
+            ))}
           </div>
         </section>
       </main>

@@ -11,33 +11,61 @@ export default function AdminLoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); setError('');
+    setLoading(true);
+    setError('');
     try {
       const form = new URLSearchParams();
-      form.append('username', email);
+      form.append('username', email.trim());
       form.append('password', password);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: form.toString(),
-      });
-      if (!res.ok) throw new Error('Invalid credentials');
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: form.toString(),
+        },
+      );
+      if (!res.ok) {
+        setError(
+          res.status === 401
+            ? 'Invalid email or password. Please try again.'
+            : res.status === 403
+              ? 'This account is inactive. Contact your administrator.'
+              : 'Sign-in is temporarily unavailable. Please try again shortly.',
+        );
+        return;
+      }
       const data = await res.json();
-      localStorage.setItem('rcl_token', data.access_token);
-      localStorage.setItem('rcl_user', data.user_email);
+      localStorage.setItem('shoshos_token', data.access_token);
+      localStorage.setItem('shoshos_user', data.user_email);
       router.push('/admin/dashboard');
     } catch {
-      setError('Invalid email or password. Please try again.');
-    } finally { setLoading(false); }
+      setError('Unable to connect to the sign-in service. Please try again shortly.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="admin-login-page">
       <div className="login-card">
         <div className="login-logo">
-          <span style={{ color: '#FB0202', fontSize: '22px' }}>▼</span>
-          <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '15px', fontWeight: 800, letterSpacing: '0.08em', color: '#0F172A' }}>
-            <strong>REWAJ</strong> <span style={{ color: '#FB0202' }}>ADMIN</span>
+          <img
+            src="/logo.png"
+            alt="Shoshos Oil and Gas Intl. Limited"
+            className="logo-icon"
+          />
+          <span
+            style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: '15px',
+              fontWeight: 800,
+              letterSpacing: '0.08em',
+              color: '#071827',
+            }}
+          >
+            <strong>shoshos</strong>{' '}
+            <span style={{ color: '#B94312' }}>ADMIN</span>
           </span>
         </div>
         <h1 className="login-title">Sign in to Dashboard</h1>
@@ -46,11 +74,23 @@ export default function AdminLoginPage() {
         <form onSubmit={handleLogin} className="login-form">
           <div className="form-group">
             <label>Email Address</label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@rewajcorporate.com" required />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@shoshosltd.com"
+              required
+            />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
           </div>
           <button type="submit" className="login-btn" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In →'}

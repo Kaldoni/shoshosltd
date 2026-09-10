@@ -6,10 +6,12 @@ import { CTABanner, Footer } from '@/components/sections/CTAAndFooter';
 import Navbar from '@/components/layout/Navbar';
 
 export const metadata = {
-  title: 'Rewaj Corporate Limited | Engineering Excellence for the Energy Industry',
+  title:
+    'Shoshos Oil and Gas Intl. Limited | Engineering, Energy, Marine & Logistics',
   description:
-    'Rewaj Corporate Limited delivers world-class oil and gas engineering solutions, procurement services, and infrastructure development across Nigeria and beyond.',
-  keywords: 'oil and gas engineering, Nigeria, procurement, control systems, Rewaj Corporate',
+    'Shoshos Oil and Gas Intl. Limited provides well intervention, marine, pipeline, engineering and logistics support for onshore and offshore energy operations.',
+  keywords:
+    'oil and gas engineering, Nigeria, procurement, marine services, Warri, shoshos',
 };
 
 export default function HomePage() {
